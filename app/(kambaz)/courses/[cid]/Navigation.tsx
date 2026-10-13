@@ -1,40 +1,113 @@
+"use client";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import "../../kambaz.css";
 
 export default function CourseNavigation({ cid }: { cid: string }) {
+  const pathname = usePathname() ?? "";
+  const home = `/courses/${cid}/home`;
+  const modules = `/courses/${cid}/modules`;
+  const assignments = `/courses/${cid}/assignments`;
+  const people = `/courses/${cid}/people/table`;
   return (
-    <div id="wd-courses-navigation">
-      <Link href={`/courses/${cid}/home`} id="wd-course-home-link">
+    <div id="wd-courses-navigation" className="wd list-group rounded-none text-lg">
+      <Link
+        href={home}
+        id="wd-course-home-link"
+        className={
+          pathname === home
+            ? "list-group-item active border-0"
+            : "list-group-item border-0 text-red-600"
+        }
+      >
         Home
-      </Link>{" "}
-      <br />
-      <Link href={`/courses/${cid}/modules`} id="wd-course-modules-link">
+      </Link>
+      <Link
+        href={modules}
+        id="wd-course-modules-link"
+        className={
+          pathname === modules
+            ? "list-group-item active border-0"
+            : "list-group-item border-0 text-red-600"
+        }
+      >
         Modules
-      </Link>{" "}
-      <br />
-      <Link href={`/courses/${cid}/piazza`} id="wd-course-piazza-link">
+      </Link>
+      {/* ...Piazza and Zoom, same pattern... */}
+      <Link
+        href={`/courses/${cid}/piazza`}
+        id="wd-course-piazza-link"
+        className={
+          pathname === `/courses/${cid}/piazza`
+            ? "list-group-item active border-0"
+            : "list-group-item border-0 text-red-600"
+        }
+      >
         Piazza
-      </Link>{" "}
-      <br />
-      <Link href={`/courses/${cid}/zoom`} id="wd-course-zoom-link">
+      </Link>
+      <Link
+        href={`/courses/${cid}/zoom`}
+        id="wd-course-zoom-link"
+        className={
+          pathname === `/courses/${cid}/zoom`
+            ? "list-group-item active border-0"
+            : "list-group-item border-0 text-red-600"
+        }
+      >
         Zoom
-      </Link>{" "}
-      <br />
-      <Link href={`/courses/${cid}/assignments`} id="wd-course-assignments-link">
+      </Link>
+      <Link
+        href={assignments}
+        id="wd-course-assignments-link"
+        className={
+          pathname === assignments || pathname.startsWith(assignments + "/")
+            ? "list-group-item active border-0"
+            : "list-group-item border-0 text-red-600"
+        }
+      >
         Assignments
-      </Link>{" "}
-      <br />
-      <Link href={`/courses/${cid}/quizzes`} id="wd-course-quizzes-link">
+      </Link>
+      {/* ...Quizzes, Grades, People, same pattern... */}
+      <Link
+        href={`/courses/${cid}/quizzes`}
+        id="wd-course-quizzes-link"
+        className={
+          pathname === `/courses/${cid}/quizzes` || pathname.startsWith(`/courses/${cid}/quizzes` + "/")
+            ? "list-group-item active border-0"
+            : "list-group-item border-0 text-red-600"
+        }
+      >
         Quizzes
-      </Link>{" "}
-      <br />
-      <Link href={`/courses/${cid}/grades`} id="wd-course-grades-link">
+      </Link>
+      <Link
+        href={`/courses/${cid}/grades`}
+        id="wd-course-grades-link"
+        className={
+          pathname === `/courses/${cid}/grades` || pathname.startsWith(`/courses/${cid}/grades` + "/")
+            ? "list-group-item active border-0"
+            : "list-group-item border-0 text-red-600"
+        }
+      >
         Grades
-      </Link>{" "}
-      <br />
-      <Link href={`/courses/${cid}/people/table`} id="wd-course-people-link">
+      </Link>
+      <Link
+        href={people}
+        id="wd-course-people-link"
+        className={
+          pathname === people || pathname.startsWith(people + "/")
+            ? "list-group-item active border-0"
+            : "list-group-item border-0 text-red-600"
+        }
+      >
         People
-      </Link>{" "}
-      <br />
+      </Link>
+      <Link
+        href={home}
+        id="wd-course-ai-link"
+        className="list-group-item border-0 text-red-600"
+      >
+        Sample
+      </Link>
     </div>
   );
 }
