@@ -28,7 +28,7 @@ export default function TOC() {
           <Link href="/book/ch1" id="wd-toc-book-link">Chapter 1</Link>
         </li>
         <li>
-          TOC designed by Jin-seo Kim
+          Jin-seo Kim
         </li>
         <li>
             Veni, vidi, vici.
@@ -37,6 +37,9 @@ export default function TOC() {
         <Link href="/" id="wd-kambaz-link">
           Kambaz
         </Link>
+        <li>
+          <Link href="https://github.com/jinseo0904/webdev-client" id="wd-github">GitHub</Link>
+        </li>
       </li>
       </ul>
     </div>
