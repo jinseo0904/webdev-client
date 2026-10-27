@@ -1,22 +1,29 @@
 import Link from "next/link";
+import * as db from "../../../../database";
 
 export default async function AssignmentEditor({
   params,
 }: {
-  params: Promise<{ cid: string }>;
+  params: Promise<{ cid: string; aid: string }>;
 }) {
-  const { cid } = await params;
+  const { cid, aid } = await params;
+  const assignment = db.assignments.find((a) => a._id === aid);
   // Shared styling for Kambaz-style input boxes, which is reusable
   const input = "w-full rounded border border-gray-300 px-3 py-2"
   return (
     <div id="wd-assignments-editor" className="p-4">
       <label htmlFor="wd-name" className="mb-1 block">Assignment Name</label>
-      <input id="wd-name" defaultValue="A1 - ENV + HTML" className={input} />
+      <input id="wd-name" defaultValue={assignment?.title ?? ""} className={input} />
+      <div id="wd-assignment-id" className="mt-1 text-sm text-gray-500">
+        Assignment id: {aid}
+      </div>
       <br />
       <br />
-      <textarea id="wd-description" className={`${input} h-48`}>
-        The assignment is available online. Submit a link to the landing page of your Web application running on Vercel.
-      </textarea>
+      <textarea
+        id="wd-description"
+        defaultValue={assignment?.description ?? ""}
+        className={`${input} h-48`}
+      />
       <br />
       <table className="w-full border-separate  border-spacing-y-4">
         <tbody>
@@ -25,7 +32,7 @@ export default async function AssignmentEditor({
               <label htmlFor="wd-points">Points</label>
             </td>
             <td>
-              <input id="wd-points" defaultValue={100} className={input} />
+              <input id="wd-points" defaultValue={assignment?.points ?? 100} className={input} />
             </td>
           </tr>
           {/* Complete on your own — see checklist below */}
@@ -102,9 +109,7 @@ export default async function AssignmentEditor({
                 <label htmlFor="wd-due-date" className="mb-1 block">Due</label>
                 <input
                   type="date"
-                  defaultValue="2026-09-27"
-                  min="2026-01-01"
-                  max="2027-12-31"
+                  defaultValue={assignment?.due}
                   id="wd-due-date"
                   className={input}
                 />
@@ -115,9 +120,7 @@ export default async function AssignmentEditor({
                     <label htmlFor="wd-available-from" className="mb-1 block">Available from</label>
                     <input
                       type="date"
-                      defaultValue="2026-09-20"
-                      min="2026-01-01"
-                      max="2027-12-31"
+                      defaultValue={assignment?.available}
                       id="wd-available-from"
                       className={input}
                     />
@@ -126,9 +129,7 @@ export default async function AssignmentEditor({
                     <label htmlFor="wd-available-until" className="mb-1 block">Until</label>
                     <input
                       type="date"
-                      defaultValue="2026-09-27"
-                      min="2026-01-01"
-                      max="2027-12-31"
+                      defaultValue={assignment?.due}
                       id="wd-available-until"
                       className={input}
                     />
